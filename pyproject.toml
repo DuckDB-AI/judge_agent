@@ -1,0 +1,26 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "judge_agent"
+version = "v0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+python-dotenv = "*"
+camel-ai = {version = "0.2.20", extras = []} 
+protobuf = "^5.26.1"
+pillow = "^11.1.0"
+requests-oauthlib = "^2.0.0"
+pandas = "^2.2.3"
+scikit-learn = "^1.6.1"
+duckduckgo-search = "^7.5.0"
+googlemaps = "^4.10.0"
+
+[tool.poetry.dependencies.naptha-sdk]
+git = "https://github.com/NapthaAI/naptha-sdk.git"
+branch = "plugins"
