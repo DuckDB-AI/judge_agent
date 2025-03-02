@@ -233,7 +233,7 @@ optimizations."""
     " score accordingly. Finally, list the opinions from each judge while"
     " preserving the judge's unique identity, along with the score and"
     " judge name, and also give a final summary of the opinions.",
-        expected_output=module_run["inputs"].get("expected_output", "Analysis results"),
+        expected_output="A comprehensive evaluation of the project, including scores and feedback from multiple judges",
         agent=researcher_agent,
         human_input=False
     )
