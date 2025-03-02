@@ -247,14 +247,14 @@ def run(module_run: Dict, *args, **kwargs):
     Modified run function that creates and executes the agent.
     If 'func_name' is 'judge_agent', return the result from the agent function.
     """
-    agent_run_input = AgentRunInput(**module_run)
-    inputs_obj = InputSchema(**agent_run_input.inputs)
-    func_to_call = globals().get(inputs_obj.func_name)
+    module_run = AgentRunInput(**module_run)
+    module_run.inputs = InputSchema(**module_run.inputs)
+    func_to_call = globals().get(module_run.inputs.func_name)
     
     if not func_to_call:
-        raise ValueError(f"Function '{inputs_obj.func_name}' not found.")
+        raise ValueError(f"Function '{module_run.inputs.func_name}' not found.")
     
-    if inputs_obj.func_name == "judge_agent":
+    if module_run.inputs.func_name == "judge_agent":
         return judge_agent()
     else:
         import inspect
@@ -263,12 +263,12 @@ def run(module_run: Dict, *args, **kwargs):
             return func_to_call()
         else:
             tool_input_class = (
-                globals().get(inputs_obj.input_type)
-                if inputs_obj.input_type else None
+                globals().get(module_run.inputs.input_type)
+                if module_run.inputs.input_type else None
             )
             input_data = (
-                tool_input_class(**inputs_obj.func_input_data)
-                if tool_input_class else inputs_obj.func_input_data
+                tool_input_class(**module_run.inputs.func_input_data)
+                if tool_input_class else module_run.inputs.func_input_data
             )
             return func_to_call(input_data)
 
